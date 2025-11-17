@@ -1,0 +1,3 @@
+show me pseudocode for preorder traversal in binary tree
+exit
+

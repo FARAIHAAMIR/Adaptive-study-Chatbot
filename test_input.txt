@@ -1,0 +1,5 @@
+what is binary tree
+show me pseudocode for preorder traversal in binary tree
+difference between array and linked list
+exit
+

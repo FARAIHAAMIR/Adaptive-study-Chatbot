@@ -1,0 +1,1 @@
+what is stack\nshow me binary search pseudocode\nshow me pseudocode for merge sort\nwhat is time complexity\ndifference between bst and binary tree\nexit\n
