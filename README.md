@@ -1,10 +1,15 @@
-#Adaptive Study Chatbot
+Adaptive Study Chatbot
+
 Course: Data Structures & Algorithms (CT-159) Section: B Department: BCIT
 
-##Project Report
-###Project Statement: The DSA Interactive Learning Chatbot is a console-based educational assistant developed in C++.The system is designed to help students learn Data Structures and Algorithms (DSA)through interactive conversations, structured topic explanations, adaptive quizzes, and persistent progress tracking.This chatbot aims to create a study experience that feels personalized and intelligent without using external AI or machine-learning models. Instead, it relies fully on core programming concepts and data structures such as stacks, maps, vectors, and file-based storage. The project demonstrates how classical DSA principles can be used to simulate AI-like behavior, maintain conversational context, and create adaptive learning pathways for students.
+Project Report
 
-##Project Overview
+Project Statement: 
+
+The DSA Interactive Learning Chatbot is a console-based educational assistant developed in C++.The system is designed to help students learn Data Structures and Algorithms (DSA)through interactive conversations, structured topic explanations, adaptive quizzes, and persistent progress tracking.This chatbot aims to create a study experience that feels personalized and intelligent without using external AI or machine-learning models. Instead, it relies fully on core programming concepts and data structures such as stacks, maps, vectors, and file-based storage. The project demonstrates how classical DSA principles can be used to simulate AI-like behavior, maintain conversational context, and create adaptive learning pathways for students.
+
+Project Overview
+
 The chatbot functions as a DSA study assistant , allowing the user to:
 ● Ask for definitions, explanations, comparisons, pseudocode, or examples.
 ● Take quizzes with difficulty levels (Easy / Medium / Hard).
@@ -18,13 +23,15 @@ The overall design focuses on three themes:
 This makes the chatbot useful as a study companion as well as a demonstration of clean
 software architecture.
 
-##Project Features
-###1.Conversational Learning
+Project Features
+
+1.Conversational Learning
 
 The chatbot allows free-text interaction and recognizes commands .A lightweight NLP module identifies both:
 ● Intent (quiz, detail, learn, compare)
 ● Topic (array, BST, graph, heap, etc.)
-###2.Adaptive Quizzing
+
+2.Adaptive Quizzing
 
 Each DSA topic contains three difficulty tiers:
 ● Easy
@@ -34,7 +41,8 @@ Every tier includes 5 curated questions stored in dedicated files
 (e.g., stack_quiz.txt, graph_quiz.txt).
 The quiz engine evaluates answers using flexible matching, so minor wording differences
 do not cause false negatives.
-###3. Context Continuity
+
+3. Context Continuity
 
 A stack of topics (std::stack<std::string>) keeps track of what the user is currently
 studying.
@@ -43,7 +51,8 @@ This enables natural follow-up questions like:
 ● “give me the pseudocode”
 ● “quiz me”
 Even if the user stops mentioning the topic explicitly, the chatbot remembers the context
-###4. Persistent, Append-Only Progress Tracking
+
+4. Persistent, Append-Only Progress Tracking
 
 The chatbot stores all user data in two append-only files:
 ● quiz_progress.txt
@@ -54,32 +63,39 @@ Stores every session’s visited topics:
 username|sessions:topic1,topic2,...
 No entries are deleted; the system maintains history across sessions.
 
-##System Architecture
+System Architecture
+
 The architecture uses modular C++ classes with clearly separated responsibilities:
-###A. main.cpp
+
+A. main.cpp
 Initializes the application, constructs all modules, and starts the chatbot loop.
-###B. ChatEngine
+
+B. ChatEngine
 ● Handles conversational flow
 ● Maintains context stack
 ● Performs FAQ-first matching
 ● Executes NLP-driven actions
 ● Saves topic history at end of session
-###C. QuizEngine
+
+C. QuizEngine
 ● Loads quiz files for the selected topic
 ● Runs interactive quizzes
 ● Evaluates answers after normalization
 ● Saves quiz results into append-only history
-###D. DataManager
+
+D. DataManager
 ● Loads topic explanations and structured content
 ● Ensures required user files exist
 ● Migrates any legacy progress.txt file from older versions
 ● Provides utility methods for data retrieval
-###E. NLP Module
+
+E. NLP Module
 Parses user input to identify:
 ● Intent (learn, quiz, compare, example, pseudocode, exit)
 ● Topic (arrays, stack, bst, etc.)
 Uses keyword matching, normalization, and fuzzy similarity (longest common substring).
-###F. Storage Design: 
+
+F. Storage Design: 
 Storage layer follows a strict append-only model:
 quiz_progress.txt
 Each line stores: username|topic:score/total:difficulty
@@ -91,7 +107,8 @@ Behavior Rules
 • New entries are always appended; old ones are never removed.
 • Developers can inspect files directly under data/user/.
 This ensures transparency, reliability, and complete learning history.
-###G.FAQ-First Matching Logic
+
+G.FAQ-First Matching Logic
 When the user enters a question containing a recognized topic:
 1. The chatbot loads FAQ items for that topic.
 2. Both the user input and FAQ questions are normalized:
@@ -101,14 +118,15 @@ punctuation and spaces
 4. If similarity ≥ 50%, the FAQ answer is returned instantly.
 5. Otherwise, the system proceeds to regular intent-based responses.
 This results in faster and more accurate answers to common phrasing.
-###H.Usage Guide Building
+
+H.Usage Guide Building
 g++ -std=c++17 main.cpp NLP.cpp ChatEngine.cpp DataManager.cpp QuizEngine.cpp -o
 chatbot.exe Running
 .\chatbot.exe
 
-##Data Structures Used
+Data Structures Used
 
-###1. Map / Unordered Map — Knowledge Base & NLP Synonym Mapping
+1. Map / Unordered Map — Knowledge Base & NLP Synonym Mapping
 Use:
 The chatbot uses maps in two major places:
 a. Knowledge Base:
@@ -120,7 +138,7 @@ Maps provide fast lookups for matching user input with the correct topic.
 Easy to update and extend as more synonyms or topics are added.
 Helps the chatbot respond accurately even if the user uses informal or varied terminology.
 
-###2. Vector — Storing Synonyms, FAQs, and Quiz Questions
+2. Vector — Storing Synonyms, FAQs, and Quiz Questions
 Use:
 Vectors are used throughout the project to store:
 Lists of synonyms for each topic (inside the NLP map).
@@ -132,7 +150,7 @@ Vectors provide dynamic resizing and fast index-based access.
 Very convenient for iterating over related words or multiple-choice questions.
 More memory-efficient and faster to loop through compared to linked lists for this use case.
 
-###3. Stack — Conversation Context Tracking
+3. Stack — Conversation Context Tracking
 Use:
 A stack maintains the conversation flow by storing the user’s recent topics and their last visited
 section.
@@ -142,7 +160,7 @@ Allows the chatbot to handle follow-up questions smoothly.
 And to store all discussed topics in session in user’s history file
 Keeps the session state clean and easy to manage.
 
-###4. Trie — Fast Keyword & Intent Matching
+4. Trie — Fast Keyword & Intent Matching
 Use:
 The NLP module uses a Trie to store important keywords, topic names, and common user-input
 patterns for fast prefix-based intent detection.
@@ -152,7 +170,7 @@ Ideal for detecting partial inputs (e.g., “tr”, “travers”, “traversal�
 Reduces ambiguity and improves the chatbot’s ability to interpret user queries.
 More efficient than scanning a full list of strings every time.
 
-###5. File Handling — Persistent User Progress
+5. File Handling — Persistent User Progress
 Use:
 All user interactions, quiz scores, and topic history are stored using an append-only file model.
 Justification:
@@ -161,10 +179,15 @@ Ensures every session builds on the previous one.
 Helps the bot remember weak areas and track long-term improvement.
 Updated Conclusion (Now Accurate to Your Implementation)
 
-##Team Members
+Team Members
+
 Rida Fatima
+
 Faraiha Amir  
+
 Tazeen Jamshed  
 
-##Conclusion
+Conclusion
+
 The DSA Interactive Learning Chatbot successfully demonstrates how classical C++ data structures can be used to build an adaptive and intelligent study assistant without relying on machine-learning libraries. By using a Trie for fast intent detection, Maps for the knowledge base and synonym-based NLP matching, Vectors for organized storage of synonyms and questions, and a Stack for conversational context, the chatbot creates a smooth and responsive learning experience. Its append-only storage model preserves progress reliably between sessions, while the modular design keeps the system easy to maintain and extend. Overall, the project showcases solid proficiency in C++, data structures and file handling
+
