@@ -1,12 +1,18 @@
 Adaptive Study Chatbot
 
-Course: Data Structures & Algorithms (CT-159) Section: B Department: BCIT
+Course: Data Structures & Algorithms (CT-159) 
+Section: B 
+Department: BCIT
+
+---
 
 Project Report
 
 Project Statement: 
 
 The DSA Interactive Learning Chatbot is a console-based educational assistant developed in C++.The system is designed to help students learn Data Structures and Algorithms (DSA)through interactive conversations, structured topic explanations, adaptive quizzes, and persistent progress tracking.This chatbot aims to create a study experience that feels personalized and intelligent without using external AI or machine-learning models. Instead, it relies fully on core programming concepts and data structures such as stacks, maps, vectors, and file-based storage. The project demonstrates how classical DSA principles can be used to simulate AI-like behavior, maintain conversational context, and create adaptive learning pathways for students.
+
+---
 
 Project Overview
 
@@ -25,6 +31,7 @@ software architecture.
 
 Project Features
 
+---
 1.Conversational Learning
 
 The chatbot allows free-text interaction and recognizes commands .A lightweight NLP module identifies both:
@@ -62,6 +69,8 @@ username|topic:score/total:difficulty
 Stores every session’s visited topics:
 username|sessions:topic1,topic2,...
 No entries are deleted; the system maintains history across sessions.
+
+---
 
 System Architecture
 
@@ -108,7 +117,7 @@ Behavior Rules
 • Developers can inspect files directly under data/user/.
 This ensures transparency, reliability, and complete learning history.
 
-G.FAQ-First Matching Logic
+G. FAQ-First Matching Logic
 When the user enters a question containing a recognized topic:
 1. The chatbot loads FAQ items for that topic.
 2. Both the user input and FAQ questions are normalized:
@@ -119,10 +128,12 @@ punctuation and spaces
 5. Otherwise, the system proceeds to regular intent-based responses.
 This results in faster and more accurate answers to common phrasing.
 
-H.Usage Guide Building
+H. Usage Guide Building
 g++ -std=c++17 main.cpp NLP.cpp ChatEngine.cpp DataManager.cpp QuizEngine.cpp -o
 chatbot.exe Running
 .\chatbot.exe
+
+---
 
 Data Structures Used
 
@@ -179,6 +190,8 @@ Ensures every session builds on the previous one.
 Helps the bot remember weak areas and track long-term improvement.
 Updated Conclusion (Now Accurate to Your Implementation)
 
+---
+
 Team Members
 
 Rida Fatima
@@ -187,7 +200,10 @@ Faraiha Amir
 
 Tazeen Jamshed  
 
+---
+
 Conclusion
 
 The DSA Interactive Learning Chatbot successfully demonstrates how classical C++ data structures can be used to build an adaptive and intelligent study assistant without relying on machine-learning libraries. By using a Trie for fast intent detection, Maps for the knowledge base and synonym-based NLP matching, Vectors for organized storage of synonyms and questions, and a Stack for conversational context, the chatbot creates a smooth and responsive learning experience. Its append-only storage model preserves progress reliably between sessions, while the modular design keeps the system easy to maintain and extend. Overall, the project showcases solid proficiency in C++, data structures and file handling
+
 
